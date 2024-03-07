@@ -20,6 +20,7 @@ public class ContaCorrente extends Conta {
 		this.limite = limite;
 	}
 	
+	@Override
 	public boolean sacar(float valor) {
 		if(this.getSaldo() + this.getLimite() > valor) {
 			this.setSaldo(this.getSaldo() - valor);
@@ -29,6 +30,7 @@ public class ContaCorrente extends Conta {
 		return false;
 	}
 	//Sobrepondo o metodo que existe na classe Conta,adicionando o atributo de limite pra ser mostrado
+	@Override //Sinalizando que está soobreescrevendo o método
 	public void visualizar() {
 		super.visualizar();
 		System.out.println("Limite : " + this.limite);

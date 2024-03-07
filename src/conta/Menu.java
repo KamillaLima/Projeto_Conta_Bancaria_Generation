@@ -4,18 +4,23 @@ import java.util.Scanner;
 
 import conta.model.Conta;
 import conta.model.ContaCorrente;
+import conta.model.ContaPoupanca;
 import conta.util.Cores;
 
 public class Menu {
 	public static void main(String[] args) {
 
-		// Teste da Classe Conta
+		// Teste da Classe Conta Corrente
 		ContaCorrente cc1 = new ContaCorrente(1, 123, 1, "José da Silva", 0.0f, 1000.0f);
 		cc1.visualizar();
 		cc1.sacar(12000.0f);
 		cc1.visualizar();
 		cc1.depositar(5000.0f);
 		cc1.visualizar();
+
+		ContaPoupanca cc2 = new ContaPoupanca(1, 123, 1, "José da Silva", 0.0f,2004);
+		
+		cc2.visualizar();
 
 		Scanner leia = new Scanner(System.in);
 
