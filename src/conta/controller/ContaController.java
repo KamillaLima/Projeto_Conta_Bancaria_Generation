@@ -67,12 +67,11 @@ public class ContaController implements ContaRepository {
 	@Override
 	public void deletar(int numero) {
 		var buscarConta = buscarNaCollection(numero);
-		if(buscarConta!=null) {
-				if(listaContas.remove(buscarConta) == true) {
-					System.out.println("CONTA DELETADA");
-				}
+		if (buscarConta != null) {
+			if (listaContas.remove(buscarConta) == true) {
+				System.out.println("CONTA DELETADA");
 			}
-		else {
+		} else {
 			System.out.println("Conta com esse número inexistente");
 		}
 
@@ -80,19 +79,48 @@ public class ContaController implements ContaRepository {
 
 	@Override
 	public void sacar(int numero, float valor) {
-		// TODO Auto-generated method stub
+		var conta = buscarNaCollection(numero);
+
+		if (conta != null) {
+
+			if (conta.sacar(valor) == true)
+				System.out.println("\nO Saque na Conta numero: " + numero + " foi efetuado com sucesso!");
+
+		} else
+			System.out.println("\nA Conta numero: " + numero + " não foi encontrada!");
 
 	}
 
 	@Override
 	public void depositar(int numero, float valor) {
-		// TODO Auto-generated method stub
+		var conta = buscarNaCollection(numero);
+
+		if (conta != null) {
+			conta.depositar(valor);
+			System.out.println("\nO Deposito na Conta numero: " + numero + " foi efetuado com sucesso!");
+
+		} else
+			System.out.println("\nA Conta numero: " + numero + " não foi encontrada!");
 
 	}
 
 	@Override
 	public void transferir(int numeroOrigem, int numeroDestino, float valor) {
-		// TODO Auto-generated method stub
+		var contaDestino = buscarNaCollection(numeroDestino);
+		var contaOrigem = buscarNaCollection(numeroOrigem);
+		if(contaDestino != null && contaOrigem!=null) {
+			
+			if(contaOrigem.sacar(valor)) {
+				contaDestino.depositar(valor);
+				System.out.println("TRANSFERENCIA COM SUCESSO");
+			}
+			else {
+				System.out.println("A CONTA ORIGEM NÃO POSSUI SALDO SUFICIENTE PARA REALIZAR A TRANSAÇÃO");
+			}
+		}
+		else {
+			System.out.println("Numero de conta(s) invalido(s)");
+		}
 
 	}
 
